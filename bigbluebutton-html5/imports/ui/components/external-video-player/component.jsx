@@ -622,21 +622,21 @@ class VideoPlayer extends Component {
             !isPresenter
               ? [
                 (
-                  <div className={styles.progressBar}>
-                    <div 
-                      className={styles.loaded}
-                      style={{ width: loaded * 100 + '%' }}
-                      >
-                      <div
-                        className={styles.played}
-                        style={{ width: played * 100 / loaded + '%'}}
-                      >
+                  <div className={hoverToolbarStyle} key="hover-toolbar-external-video">
+                    
+                    <div className={styles.progressBar}>
+                      <div 
+                        className={styles.loaded}
+                        style={{ width: loaded * 100 + '%' }}
+                        >
+                        <div
+                          className={styles.played}
+                          style={{ width: played * 100 / loaded + '%'}}
+                        >
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ),
-                (
-                  <div className={hoverToolbarStyle} key="hover-toolbar-external-video">
+
                     <VolumeSlider
                       hideVolume={this.hideVolume[playerName]}
                       volume={volume}
@@ -644,7 +644,7 @@ class VideoPlayer extends Component {
                       onMuted={this.handleOnMuted}
                       onVolumeChanged={this.handleVolumeChanged}
                     />
-
+                    
                     <ReloadButton
                       handleReload={this.handleReload}
                       label={intl.formatMessage(intlMessages.refreshLabel)}
