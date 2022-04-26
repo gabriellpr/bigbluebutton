@@ -13,6 +13,7 @@ import deviceInfo from '/imports/utils/deviceInfo';
 
 import logger from '/imports/startup/client/logger';
 
+import Subtitles from './subtitles/component';
 import VolumeSlider from './volume-slider/component';
 import ReloadButton from '/imports/ui/components/reload-button/component';
 import FullscreenButtonContainer from '/imports/ui/components/common/fullscreen-button/container';
@@ -69,6 +70,7 @@ class VideoPlayer extends Component {
     this.throttleTimeout = null;
 
     this.state = {
+      subtitlesOn: false,
       muted: false,
       playing: false,
       autoPlayBlocked: false,
@@ -83,6 +85,7 @@ class VideoPlayer extends Component {
       Vimeo: true,
       Facebook: true,
       ArcPlayer: true,
+      //YouTube: true,
     };
 
     this.opts = {
@@ -147,6 +150,7 @@ class VideoPlayer extends Component {
     this.getMuted = this.getMuted.bind(this);
     this.setPlaybackRate = this.setPlaybackRate.bind(this);
     this.onBeforeUnload = this.onBeforeUnload.bind(this);
+    this.toggleSubtitle = this.toggleSubtitle.bind(this);
 
     this.mobileHoverSetTimeout = null;
   }
@@ -234,6 +238,16 @@ class VideoPlayer extends Component {
         value: false,
       });
     }
+  }
+
+  toggleSubtitle() {
+
+    this.setState((state) => {
+      console.log(state);
+      return {...state, subtitlesOn: !state.subtitlesOn}
+    });
+
+    console.log('subtitlesOn')
   }
 
   handleOnReady() {
@@ -555,7 +569,7 @@ class VideoPlayer extends Component {
 
     const {
       playing, playbackRate, mutedByEchoTest, autoPlayBlocked,
-      volume, muted, key, showHoverToolBar, played, loaded
+      volume, muted, key, showHoverToolBar, played, loaded, subtitlesOn
     } = this.state;
 
     // This looks weird, but I need to get this nested player
@@ -572,6 +586,12 @@ class VideoPlayer extends Component {
       toolbarStyle = 'showMobileHoverToolbar';
     }
     const isMinimized = width === 0 && height === 0;
+
+    console.log(this.state);
+
+    this.opts.youtube.playerVars.cc_load_policy = !isPresenter && subtitlesOn ? 1 : 0;
+
+    console.log(this.opts.youtube.playerVars.cc_load_policy);
 
     return (
       <span
@@ -642,6 +662,9 @@ class VideoPlayer extends Component {
                       muted={muted || mutedByEchoTest}
                       onMuted={this.handleOnMuted}
                       onVolumeChanged={this.handleVolumeChanged}
+                    />
+                    <Subtitles 
+                      toggleSubtitle={this.toggleSubtitle}
                     />
 
                     <ReloadButton
