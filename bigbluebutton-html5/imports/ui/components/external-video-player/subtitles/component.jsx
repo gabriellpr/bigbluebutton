@@ -12,9 +12,7 @@ class Subtitles extends Component {
       const { toggleSubtitle } = this.props;
         return (
             <Styled.SubtitlesWrapper onClick={() => toggleSubtitle()}>
-              <button>
-                <Icon iconName='closed_caption' />
-              </button>
+              <Icon iconName='closed_caption' />
             </Styled.SubtitlesWrapper>
         );
     }

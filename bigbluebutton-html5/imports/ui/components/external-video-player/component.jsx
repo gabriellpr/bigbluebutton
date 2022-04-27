@@ -241,13 +241,17 @@ class VideoPlayer extends Component {
   }
 
   toggleSubtitle() {
-
     this.setState((state) => {
-      console.log(state);
-      return {...state, subtitlesOn: !state.subtitlesOn}
+      return { subtitlesOn: !state.subtitlesOn };
+    }, () => {
+      const { subtitlesOn } = this.state;
+      const { isPresenter } = this.props;
+      if (!isPresenter && subtitlesOn) {
+        this.player.getInternalPlayer().setOption('captions', 'reload', true);
+      } else {
+        this.player.getInternalPlayer().unloadModule('captions');
+      }
     });
-
-    console.log('subtitlesOn')
   }
 
   handleOnReady() {
@@ -586,12 +590,6 @@ class VideoPlayer extends Component {
       toolbarStyle = 'showMobileHoverToolbar';
     }
     const isMinimized = width === 0 && height === 0;
-
-    console.log(this.state);
-
-    this.opts.youtube.playerVars.cc_load_policy = !isPresenter && subtitlesOn ? 1 : 0;
-
-    console.log(this.opts.youtube.playerVars.cc_load_policy);
 
     return (
       <span
