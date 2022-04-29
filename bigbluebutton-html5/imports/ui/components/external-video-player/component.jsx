@@ -117,7 +117,7 @@ class VideoPlayer extends Component {
           autohide: 1,
           rel: 0,
           ecver: 2,
-          controls: 1,
+          controls: isPresenter ? 1 : 0,
         },
       },
       peertube: {
@@ -661,14 +661,19 @@ class VideoPlayer extends Component {
                       onMuted={this.handleOnMuted}
                       onVolumeChanged={this.handleVolumeChanged}
                     />
-                    <Subtitles 
-                      toggleSubtitle={this.toggleSubtitle}
-                    />
+
+                  
 
                     <ReloadButton
                       handleReload={this.handleReload}
                       label={intl.formatMessage(intlMessages.refreshLabel)}
                     />
+                    {
+                    playerName === 'YouTube' && (
+                      <Subtitles 
+                        toggleSubtitle={this.toggleSubtitle}
+                      />
+                    )}
                     {this.renderFullscreenButton()}
                   </Styled.HoverToolbar>
                 ),
