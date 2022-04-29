@@ -1,30 +1,50 @@
 import styled from 'styled-components';
+import Button from '/imports/ui/components/common/button/component';
+
 import { colorTransparent } from '/imports/ui/stylesheets/styled-components/palette';
 
 const SubtitlesWrapper = styled.div`
-  position: absolute;
-  z-index: 2;
-  border: 0;
-  margin: 2px;
-  bottom: 0;
-  top: 0;
-  right: 4%;
-  left: auto;
-  cursor: pointer;
-  opacity: .5;
-  
-  color: #0F70D7;
-  background-color: ${colorTransparent};
+position: absolute;
+right: auto;
+left: 5%;
+background-color: ${colorTransparent};
+cursor: pointer;
+border: 0;
+z-index: 2;
+margin: 2px;
+bottom: 0;
+top: 0;
 
+[dir="rtl"] & {
+  right: 0;
+  left : auto;
+}
+`;
 
-  &:hover {
-    opacity: 9;
+const SubtitlesButton = styled(Button)`
+&,
+&:active,
+&:hover,
+&:focus {
+  border: none !important;
+
+  i {
+    border: none !important;
+    background-color: ${colorTransparent} !important;
   }
+}
+padding: 5px;
 
-  
+&:hover {
+  border: 0;
+}
 
+i {
+  font-size: 1rem;
+}
 `;
 
 export default {
   SubtitlesWrapper,
+  SubtitlesButton
 };

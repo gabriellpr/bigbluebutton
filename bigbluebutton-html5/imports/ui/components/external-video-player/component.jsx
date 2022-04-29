@@ -661,9 +661,6 @@ class VideoPlayer extends Component {
                       onMuted={this.handleOnMuted}
                       onVolumeChanged={this.handleVolumeChanged}
                     />
-
-                  
-
                     <ReloadButton
                       handleReload={this.handleReload}
                       label={intl.formatMessage(intlMessages.refreshLabel)}

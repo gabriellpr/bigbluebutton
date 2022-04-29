@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Styled from './styles';
 
-import Button from '/imports/ui/components/common/button/component';
-import Icon from '/imports/ui/components/common/icon/component';
-
 class Subtitles extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +9,14 @@ class Subtitles extends Component {
     render() {
       const { toggleSubtitle } = this.props;
         return (
-            <Styled.SubtitlesWrapper onClick={() => toggleSubtitle()}>
-              <Icon 
-                style={{ fontSize: '1.5em', }}
-                iconName='closed_caption' />
+            <Styled.SubtitlesWrapper>
+              <Styled.SubtitlesButton 
+                color="primary"
+                icon="closed_caption"
+                onClick={() => toggleSubtitle()}
+                label={'Subtitles'}
+                hideLabel
+              />
             </Styled.SubtitlesWrapper>
         );
     }
