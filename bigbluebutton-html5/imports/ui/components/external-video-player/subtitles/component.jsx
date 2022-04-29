@@ -6,20 +6,20 @@ class Subtitles extends Component {
     super(props);
   }
 
-    render() {
-      const { toggleSubtitle } = this.props;
-        return (
-            <Styled.SubtitlesWrapper>
-              <Styled.SubtitlesButton 
-                color="primary"
-                icon="closed_caption"
-                onClick={() => toggleSubtitle()}
-                label={'Subtitles'}
-                hideLabel
-              />
-            </Styled.SubtitlesWrapper>
-        );
-    }
+  render() {
+    const { toggleSubtitle, label } = this.props;
+    return (
+      <Styled.SubtitlesWrapper>
+        <Styled.SubtitlesButton 
+          color="primary"
+          icon="closed_caption"
+          onClick={() => toggleSubtitle()}
+          label={label}
+          hideLabel
+        />
+      </Styled.SubtitlesWrapper>
+    );
+  }
 }
 
 export default Subtitles;

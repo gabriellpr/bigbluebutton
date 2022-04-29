@@ -35,6 +35,12 @@ const intlMessages = defineMessages({
   fullscreenLabel: {
     id: 'app.externalVideo.fullscreenLabel',
   },
+  subtitlesOn: {
+    id: 'app.externalVideo.subtitlesOn',
+  },
+  subtitlesOff: {
+    id: 'app.externalVideo.subtitlesOff',
+  },
 });
 
 const SYNC_INTERVAL_SECONDS = 5;
@@ -118,6 +124,7 @@ class VideoPlayer extends Component {
           rel: 0,
           ecver: 2,
           controls: isPresenter ? 1 : 0,
+          cc_lang_pref: document.getElementsByTagName('html')[0].lang.substring(0, 2),
         },
       },
       peertube: {
@@ -247,9 +254,9 @@ class VideoPlayer extends Component {
       const { subtitlesOn } = this.state;
       const { isPresenter } = this.props;
       if (!isPresenter && subtitlesOn) {
-        this.player.getInternalPlayer().setOption('captions', 'reload', true);
+        this?.player?.getInternalPlayer()?.setOption('captions', 'reload', true);
       } else {
-        this.player.getInternalPlayer().unloadModule('captions');
+        this?.player?.getInternalPlayer()?.unloadModule('captions');
       }
     });
   }
@@ -661,16 +668,21 @@ class VideoPlayer extends Component {
                       onMuted={this.handleOnMuted}
                       onVolumeChanged={this.handleVolumeChanged}
                     />
-                    <ReloadButton
-                      handleReload={this.handleReload}
-                      label={intl.formatMessage(intlMessages.refreshLabel)}
-                    />
-                    {
-                    playerName === 'YouTube' && (
-                      <Subtitles 
-                        toggleSubtitle={this.toggleSubtitle}
+                    <Styled.ButtonsWrapper>
+                      <ReloadButton
+                        handleReload={this.handleReload}
+                        label={intl.formatMessage(intlMessages.refreshLabel)}
                       />
-                    )}
+                      {playerName === 'YouTube' && (
+                        <Subtitles
+                          toggleSubtitle={this.toggleSubtitle}
+                          label={subtitlesOn
+                            ? intl.formatMessage(intlMessages.subtitlesOn)
+                            : intl.formatMessage(intlMessages.subtitlesOff)
+                          }
+                        />
+                      )}
+                    </Styled.ButtonsWrapper>
                     {this.renderFullscreenButton()}
                   </Styled.HoverToolbar>
                 ),
