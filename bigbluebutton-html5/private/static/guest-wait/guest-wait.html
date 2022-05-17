@@ -301,6 +301,11 @@
       }, REDIRECT_TIMEOUT);
     };
 
+    function noRedirect(message) {
+      disableAnimation();
+      updateMessage(message);
+    }
+
     function pollGuestStatus(token, everyMs) {
 
       setTimeout(function () {
@@ -318,7 +323,7 @@
 
             if (status === 'DENY') {
               stopUpdatingWaitingPosition();
-              return redirect(_('app.guest.' + data.response.messageKey), data.response.url);
+              return noRedirect(_('app.guest.' + data.response.messageKey));
             }
 
             if (status === 'ALLOW') {
@@ -364,7 +369,7 @@
     </div>
     <p aria-live="polite">Please wait for a moderator to approve you joining the meeting.</p>
     <div id="positionInWaitingQueue">
-      <p aria-live="polite">Calculating position in waiting queue</p>
+      <p aria-live="polite">Retrieving user's status.</p>
     </div>
   </div>
 </body>
