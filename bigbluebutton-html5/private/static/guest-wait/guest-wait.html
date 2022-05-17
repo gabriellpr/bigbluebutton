@@ -271,6 +271,31 @@
                   return;
                 }
 
+                // First, check that we already have a response
+                const statusFromStorage = sessionStorage.getItem(`guestStatus_${sessionToken}`);
+
+                if (statusFromStorage) {
+                  stopUpdatingWaitingPosition();
+
+                  const statusParsed = JSON.parse(statusFromStorage);
+                  const { status, response } = statusParsed;
+
+                  if (status === 'ALLOW') {
+                    updateLobbyMessage(_('app.guest.allow'));
+                    setTimeout(() => {
+                      disableAnimation();
+                      window.location = response.url;
+                    }, MESSAGE_TIMEOUT);
+                  } else {
+                    redirect(
+                      _('app.guest.' + response.messageKey),
+                      response.url,
+                    );
+                  }
+
+                  return;
+                }
+
                 pollGuestStatus(sessionToken, ATTEMPT_EVERY_MS);
               } catch (e) {
                 disableAnimation();
@@ -316,6 +341,11 @@
 
             if (code === 'FAILED') {
               stopUpdatingWaitingPosition();
+              const userStatus = {
+                status: 'FAILED',
+                response: data.response,
+              };
+              sessionStorage.setItem(`guestStatus_${token}`, JSON.stringify(userStatus));
               return redirect(_('app.guest.' + data.response.messageKey), data.response.url);
             }
 
@@ -323,12 +353,22 @@
 
             if (status === 'DENY') {
               stopUpdatingWaitingPosition();
-              return noRedirect(_('app.guest.' + data.response.messageKey));
+              const userStatus = {
+                status: 'DENY',
+                response: data.response,
+              };
+              sessionStorage.setItem(`guestStatus_${token}`, JSON.stringify(userStatus));
+              return redirect(_('app.guest.' + data.response.messageKey), data.response.url);
             }
 
             if (status === 'ALLOW') {
               updateLobbyMessage(_('app.guest.allow'));
               stopUpdatingWaitingPosition();
+              const userStatus = {
+                status: 'ALLOW',
+                response: data.response,
+              };
+              sessionStorage.setItem(`guestStatus_${token}`, JSON.stringify(userStatus));
               // Timeout is required by accessibility to allow viewing of the message for a minimum of 3 seconds
               // before redirecting.
               setTimeout(() => {
