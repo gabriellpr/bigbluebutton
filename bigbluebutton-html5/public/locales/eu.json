@@ -930,6 +930,8 @@
     "app.externalVideo.refreshLabel": "Eguneratu bideo erreproduzigailua",
     "app.externalVideo.fullscreenLabel": "Bideo erreproduzigailua",
     "app.externalVideo.noteLabel": "Oharra: kanpoko bideo partekatuak ez dira grabazioan agertuko. YouTube, Vimeo, Instructure Media, Twitch eta Daily Motion eta media fitxategien URLak onartzen dira  (adib.. https://example.com/xy.mp4).",
+    "app.externalVideo.subtitlesOn": "Itzali",
+    "app.externalVideo.subtitlesOff": "Piztu (ahal bada)",
     "app.actionsBar.actionsDropdown.shareExternalVideo": "Partekatu kanpoko bideo bat",
     "app.actionsBar.actionsDropdown.stopShareExternalVideo": "Gelditu kanpoko bideoaren partekatzea",
     "app.iOSWarning.label": "Eguneratu iOS 12.2 edo berriagora",
