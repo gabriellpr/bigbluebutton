@@ -13,10 +13,11 @@ async function openChat(testPage) {
 async function openPrivateChat(testPage) {
   const { chatEnabled } = getSettings();
   test.fail(!chatEnabled, 'Chat is disabled');
-
+  
   await testPage.waitAndClick(e.userListItem);
   await testPage.waitAndClick(e.startPrivateChat);
 }
+
 
 exports.openChat = openChat;
 exports.openPrivateChat = openPrivateChat;

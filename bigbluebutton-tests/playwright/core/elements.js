@@ -304,3 +304,12 @@ exports.pencil = 'button[data-test="pencilTool"]';
 exports.showMoreSharedNotesButton = 'span[class="show-more-icon-btn"]'
 exports.exportSharedNotesButton = 'button[aria-label="Import/Export from/to different file formats"]';
 exports.exportPlainButton = 'span[id="exportplain"]';
+
+// Emoji picker
+exports.emojiPickerButton = 'button[data-test="emojiPickerButton"]';
+exports.frequentlyUsedEmoji = '👍';
+exports.emojiSent = 'section[aria-label="Frequently Used"] button[title="+1"] span';
+
+// Auto Convert Emoji
+exports.autoConvertEmojiMessage = ':)';
+exports.convertedEmojiMessage = '😊';

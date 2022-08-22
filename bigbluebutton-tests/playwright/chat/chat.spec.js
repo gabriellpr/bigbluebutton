@@ -61,4 +61,55 @@ test.describe.parallel('Chat', () => {
     await privateChat.initPages(page);
     await privateChat.chatDisabledUserLeaves();
   });
+
+  // Emojis Test
+  test('Emoji Picker send', async ({ browser, page }) => {
+    const emoji = new Chat(browser, page);
+    await emoji.init(true, true);
+    await emoji.sendEmoji();
+  });
+
+  test('Emoji Picker copy chat', async ({ browser, context, page }, testInfo) => {
+    test.fixme(testInfo.project.use.headless, 'Only works in headed mode');
+    const chat = new Chat(browser, page);
+    await chat.init(true, true);
+    await chat.emojiCopyChat(context);
+  });
+
+  test('Emoji Picker save chat', async ({ browser, page }, testInfo) => {
+    const chat = new Chat(browser, page);
+    await chat.init(true, true);
+    await chat.emojiSaveChat(testInfo);
+  });
+
+  test('Emoji Picker Send Private Chat', async ({ browser, context, page }) => {
+    const emojiprivatechat = new PrivateChat(browser, context);
+    await emojiprivatechat.initPages(page);
+    await emojiprivatechat.emojiSendPrivateChat();
+  });
+
+  test('Auto Convert Emoji Send', async ({ browser, page }) => {
+    const emoji = new Chat(browser, page);
+    await emoji.init(true, true);
+    await emoji.autoConvertEmojiPublicChat();
+  });
+
+  test('Auto Convert emoji copy chat', async ({ browser, context, page }, testInfo) => {
+    test.fixme(testInfo.project.use.headless, 'Only works in headed mode');
+    const chat = new Chat(browser, page);
+    await chat.init(true, true);
+    await chat.autoConvertEmojiCopyChat(context);
+  });
+
+  test('Auto Convert emoji save chat', async ({ browser, page }, testInfo) => {
+    const chat = new Chat(browser, page);
+    await chat.init(true, true);
+    await chat.autoConvertEmojiSaveChat(testInfo);
+  });
+
+  test('Auto Convert Emoji Send Private Chat', async ({ browser, context, page }) => {
+    const emojiprivatechat = new PrivateChat(browser, context);
+    await emojiprivatechat.initPages(page);
+    await emojiprivatechat.autoConvertEmojiSendPrivateChat();
+  });
 });
