@@ -62,54 +62,56 @@ test.describe.parallel('Chat', () => {
     await privateChat.chatDisabledUserLeaves();
   });
 
-  // Emojis Test
-  test('Emoji Picker send', async ({ browser, page }) => {
-    const emoji = new Chat(browser, page);
-    await emoji.init(true, true);
-    await emoji.sendEmoji();
-  });
-
-  test('Emoji Picker copy chat', async ({ browser, context, page }, testInfo) => {
-    test.fixme(testInfo.project.use.headless, 'Only works in headed mode');
-    const chat = new Chat(browser, page);
-    await chat.init(true, true);
-    await chat.emojiCopyChat(context);
-  });
-
-  test('Emoji Picker save chat', async ({ browser, page }, testInfo) => {
-    const chat = new Chat(browser, page);
-    await chat.init(true, true);
-    await chat.emojiSaveChat(testInfo);
-  });
-
-  test('Emoji Picker Send Private Chat', async ({ browser, context, page }) => {
-    const emojiprivatechat = new PrivateChat(browser, context);
-    await emojiprivatechat.initPages(page);
-    await emojiprivatechat.emojiSendPrivateChat();
-  });
-
-  test('Auto Convert Emoji Send', async ({ browser, page }) => {
-    const emoji = new Chat(browser, page);
-    await emoji.init(true, true);
-    await emoji.autoConvertEmojiPublicChat();
-  });
-
-  test('Auto Convert emoji copy chat', async ({ browser, context, page }, testInfo) => {
-    test.fixme(testInfo.project.use.headless, 'Only works in headed mode');
-    const chat = new Chat(browser, page);
-    await chat.init(true, true);
-    await chat.autoConvertEmojiCopyChat(context);
-  });
-
-  test('Auto Convert emoji save chat', async ({ browser, page }, testInfo) => {
-    const chat = new Chat(browser, page);
-    await chat.init(true, true);
-    await chat.autoConvertEmojiSaveChat(testInfo);
-  });
-
-  test('Auto Convert Emoji Send Private Chat', async ({ browser, context, page }) => {
-    const emojiprivatechat = new PrivateChat(browser, context);
-    await emojiprivatechat.initPages(page);
-    await emojiprivatechat.autoConvertEmojiSendPrivateChat();
+  test.describe.parallel('Emoji', () => {
+    test('Send emoji on public chat', async ({ browser, page }) => {
+      const emoji = new Chat(browser, page);
+      await emoji.init(true, true);
+      await emoji.sendEmoji();
+    });
+  
+    test('Copy chat with emoji', async ({ browser, context, page }, testInfo) => {
+      test.fixme(testInfo.project.use.headless, 'Only works in headed mode');
+      const emoji = new Chat(browser, page);
+      await emoji.init(true, true);
+      await emoji.emojiCopyChat(context);
+    });
+  
+    test('Save chat with emoji', async ({ browser, page }, testInfo) => {
+      const emoji = new Chat(browser, page);
+      await emoji.init(true, true);
+      await emoji.emojiSaveChat(testInfo);
+    });
+  
+    test('Send emoji on private chat', async ({ browser, context, page }) => {
+      const emoji = new PrivateChat(browser, context);
+      await emoji.initPages(page);
+      await emoji.emojiSendPrivateChat();
+    });
+  
+    test('Send auto converted emoji on public chat', async ({ browser, page }) => {
+      const emoji = new Chat(browser, page);
+      await emoji.init(true, true);
+      await emoji.autoConvertEmojiPublicChat();
+    });
+  
+    test('Copy chat with auto converted emoji', async ({ browser, context, page }, testInfo) => {
+      test.fixme(testInfo.project.use.headless, 'Only works in headed mode');
+      const emoji = new Chat(browser, page);
+      await emoji.init(true, true);
+      await emoji.autoConvertEmojiCopyChat(context);
+    });
+  
+    test('Save chat with auto converted emoji', async ({ browser, page }, testInfo) => {
+      const emoji = new Chat(browser, page);
+      await emoji.init(true, true);
+      await emoji.autoConvertEmojiSaveChat(testInfo);
+    });
+  
+    test('Send auto converted emoji on private chat', async ({ browser, context, page }) => {
+      const emoji = new PrivateChat(browser, context);
+      await emoji.initPages(page);
+      await emoji.autoConvertEmojiSendPrivateChat();
+    });
   });
 });
+
