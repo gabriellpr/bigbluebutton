@@ -56,9 +56,7 @@ class PrivateChat extends MultiUsers {
     await this.modPage.hasElementDisabled(e.sendButton);
   }
 
-
-  // Emoji Picker
-
+  // Emojis
   async emojiSendPrivateChat() {
     const { emojiPickerEnabled } = getSettings();
     test.fail(!emojiPickerEnabled, 'Emoji Picker is disabled');
@@ -85,8 +83,6 @@ class PrivateChat extends MultiUsers {
     await this.userPage.hasText(e.privateChat, e.frequentlyUsedEmoji);
   }
 
-
-  // AutoConvert Emoji
   async autoConvertEmojiSendPrivateChat() {
     const { autoConvertEmojiEnabled } = getSettings();
     test.fail(!autoConvertEmojiEnabled, 'Auto Convert Emoji is disabled');
