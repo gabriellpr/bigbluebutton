@@ -145,11 +145,6 @@ class Presentation extends MultiUsers {
   }
 
   async uploadAndRemoveAllPresentations() {
-    // Upload
-    const modSlides0 = await getSlideOuterHtml(this.modPage);
-    const userSlides0 = await getSlideOuterHtml(this.userPage);
-    await expect(modSlides0).toEqual(userSlides0);
-
     await uploadSinglePresentation(this.modPage, e.uploadPresentationFileName);
 
     const modSlides1 = await getSlideOuterHtml(this.modPage);
@@ -188,7 +183,6 @@ class Presentation extends MultiUsers {
   }
 
   async removePreviousPresentationFromPreviousPresenter() {
-   
     await uploadSinglePresentation(this.modPage, e.uploadPresentationFileName);
 
     const modSlides1 = await getSlideOuterHtml(this.modPage);
