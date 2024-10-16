@@ -104,9 +104,8 @@ class LockViewers extends MultiUsers {
   }
 
   async lockSendPrivateChatMessages() {
-    const lastUserItemLocator = this.userPage.getLocatorByIndex(e.userListItem, -1);
-    await this.userPage.clickOnLocator(lastUserItemLocator);
-    const startPrivateChatButton = this.userPage.getLocatorByIndex(e.startPrivateChat, -1);
+    await this.userPage.waitAndClick(e.userListItem);
+    const startPrivateChatButton = this.userPage.getLocator(e.startPrivateChat).first();
     await this.userPage.clickOnLocator(startPrivateChatButton);
     await openLockViewers(this.modPage);
     await this.modPage.waitAndClickElement(e.lockPrivateChat);

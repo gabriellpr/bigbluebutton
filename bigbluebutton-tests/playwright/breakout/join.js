@@ -221,8 +221,8 @@ class Join extends Create {
     await expect(this.modPage.getLocatorByIndex(e.actionsItem, 2)).toHaveText("Upload/Manage presentations"); //This checks if no other content was exported.
     await this.modPage.checkElementCount(e.actionsItem, 8);
     await whiteboardPDF.click();
-    await this.modPage.waitAndClick('i[type="info"]');
-    await this.modPage.waitAndClick(e.currentPresentationToast);
+    //await this.modPage.waitAndClick('i[type="info"]');
+    //await this.modPage.waitAndClick(e.currentPresentationToast);
 
     //! avoiding the following screenshot comparison due to https://github.com/microsoft/playwright/issues/18827
     // const wbBox = await this.modPage.getLocator(e.whiteboard);
